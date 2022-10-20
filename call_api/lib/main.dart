@@ -17,10 +17,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    // ignore: todo
-    // TODO: implement initState
     super.initState();
-
     users = getUsers();
     // getUsers();
   }
@@ -42,10 +39,10 @@ class _MyAppState extends State<MyApp> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
+                    Text(snapshot.data!.id),
                     Text(snapshot.data!.nama),
-                    // Text(snapshot.data!.almat),
-                    // Text(snapshot.data!.pekerjaan),
-                    // Text(snapshot.data!.id),
+                    Text(snapshot.data!.email),
+                    Text(snapshot.data!.password),
                   ],
                 );
               } else if (snapshot.hasError()) {

@@ -1,45 +1,39 @@
 import 'dart:convert';
-// import 'dart:html';
 import 'package:http/http.dart' as http;
 
 class Users {
   String nama;
-  // String almat;
-  // String pekerjaan;
-  // String password;
-  // String id;
+  String email;
+  String password;
+  String id;
   Users({
     required this.nama,
-    // required this.almat,
-    // required this.pekerjaan,
-    // required this.password,
-    // required this.id,
+    required this.email,
+    required this.password,
+    required this.id,
   });
 
   factory Users.fromJson(Map<String, dynamic> json) => Users(
+        id: json["id"],
         nama: json["nama"],
-        // almat: json["alamat"],
-        // pekerjaan: json["pekerjaan"],
-        // password: json["password"],
-        // id: json["id"],
+        email: json["email"],
+        password: json["password"],
       );
 }
 
 Future<Users> getUsers() async {
-  final response = await http.get(Uri.parse('http://localhost/wait/api.php'),
-      headers: {
-        "Accept": "application/json",
-        "Access-Control-Allow-Origin": "*"
-      });
+  final response = await http.get(
+    Uri.parse('http://localhost/wait/api.php'),
+  );
   print(response.body);
   print(response.statusCode);
   // print(hasil);
 
   if (response.statusCode == 200) {
-    var hasil = Users.fromJson(jsonDecode(response.body)[0]);
+    var hasil = Users.fromJson(jsonDecode(response.body)['result'][0]);
     print("test");
     print(hasil);
-    return Users.fromJson(json.decode(response.body)[0]);
+    return Users.fromJson(json.decode(response.body)['result'][0]);
   } else {
     throw Exception('GAgal load post');
   }
